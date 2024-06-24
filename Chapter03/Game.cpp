@@ -7,14 +7,14 @@
 // ----------------------------------------------------------------
 
 #include "Game.h"
-#include "SDL/SDL_image.h"
+#include "SDL_image.h"
 #include <algorithm>
 #include "Actor.h"
 #include "SpriteComponent.h"
 #include "Ship.h"
 #include "Asteroid.h"
 #include "Random.h"
-
+#include "NewAsteroid.h"
 Game::Game()
 :mWindow(nullptr)
 ,mRenderer(nullptr)
@@ -171,6 +171,11 @@ void Game::LoadData()
 	{
 		new Asteroid(this);
 	}
+	const int numNewAsteroids = 10;
+	for (int i = 0; i < numNewAsteroids; i++)
+	{
+		new NewAsteroid(this);
+	}
 }
 
 void Game::UnloadData()
@@ -235,6 +240,21 @@ void Game::RemoveAsteroid(Asteroid* ast)
 	if (iter != mAsteroids.end())
 	{
 		mAsteroids.erase(iter);
+	}
+}
+
+void Game::AddNewAsteroid(NewAsteroid* ast)
+{
+	mNewAsteroids.emplace_back(ast);
+}
+
+void Game::RemoveNewAsteroid(NewAsteroid* ast)
+{
+	auto iter = std::find(mNewAsteroids.begin(),
+		mNewAsteroids.end(), ast);
+	if (iter != mNewAsteroids.end())
+	{
+		mNewAsteroids.erase(iter);
 	}
 }
 

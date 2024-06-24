@@ -7,11 +7,10 @@
 // ----------------------------------------------------------------
 
 #pragma once
-#include "SDL/SDL.h"
+#include "SDL.h"
 #include <unordered_map>
 #include <string>
 #include <vector>
-
 class Game
 {
 public:
@@ -32,6 +31,10 @@ public:
 	void AddAsteroid(class Asteroid* ast);
 	void RemoveAsteroid(class Asteroid* ast);
 	std::vector<class Asteroid*>& GetAsteroids() { return mAsteroids; }
+
+	void AddNewAsteroid(class NewAsteroid* ast);
+	void RemoveNewAsteroid(class NewAsteroid* ast);
+	std::vector<class NewAsteroid*>& GetNewAsteroids() { return mNewAsteroids; }
 private:
 	void ProcessInput();
 	void UpdateGame();
@@ -60,4 +63,6 @@ private:
 	// Game-specific
 	class Ship* mShip; // Player's ship
 	std::vector<class Asteroid*> mAsteroids;
+	std::vector<class NewAsteroid*> mNewAsteroids;
+
 };
